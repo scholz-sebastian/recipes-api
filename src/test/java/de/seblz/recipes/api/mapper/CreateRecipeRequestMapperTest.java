@@ -7,7 +7,7 @@ import de.seblz.recipes.api.dto.request.CreateRecipeRequest;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CreateRecipeRequestMapperTest {
 
@@ -51,12 +51,12 @@ class CreateRecipeRequestMapperTest {
         Ingredient ingredientOne = new Ingredient();
         ingredientOne.setAmount(INGREDIENT_ONE_AMOUNT);
         ingredientOne.setUnit(INGREDIENT_ONE__UNIT);
-        ingredientOne.setValue(INGREDIENT_ONE_VALUE);
+        ingredientOne.setIngredient(INGREDIENT_ONE_VALUE);
 
         Ingredient ingredientTwo = new Ingredient();
         ingredientTwo.setAmount(INGREDIENT_TWO_AMOUNT);
         ingredientTwo.setUnit(INGREDIENT_TWO_UNIT);
-        ingredientTwo.setValue(INGREDIENT_TWO_VALUE);
+        ingredientTwo.setIngredient(INGREDIENT_TWO_VALUE);
         request.setIngredients(Lists.newArrayList(ingredientOne, ingredientTwo));
 
         RecipeEntity result = mapper.map(request);

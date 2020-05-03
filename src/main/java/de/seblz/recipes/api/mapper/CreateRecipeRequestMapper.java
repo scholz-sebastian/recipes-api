@@ -19,7 +19,7 @@ public class CreateRecipeRequestMapper {
             IngredientEntity ingredientEntity = new IngredientEntity();
             ingredientEntity.setAmount(ingredient.getAmount());
             ingredientEntity.setUnit(ingredient.getUnit());
-            ingredientEntity.setValue(ingredient.getValue());
+            ingredientEntity.setValue(ingredient.getIngredient());
             return ingredientEntity;
         }).collect(Collectors.toList()));
         return entity;

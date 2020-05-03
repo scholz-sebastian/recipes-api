@@ -8,6 +8,7 @@ import java.util.UUID;
 
 @Data
 public class RecipeEntity {
+
     @Id
     private UUID recipeId;
 
@@ -16,9 +17,4 @@ public class RecipeEntity {
     private String title;
 
     private List<String> instructions;
-
-    public RecipeEntity() {
-        this.recipeId = UUID.randomUUID();
-    }
-
 }

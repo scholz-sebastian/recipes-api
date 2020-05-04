@@ -1,3 +1,14 @@
+recipe:
+  security:
+    apiMatcher: "/api/**"
+    cors:
+      allowedOrigins: *
+      allowedHeaders: "*"
+      exposedHeaders: Location, Content-Disposition
+      allowedMethods: GET,POST,PUT,DELETE,OPTIONS
+      allowCredentials: true
+      maxAge: 3600
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

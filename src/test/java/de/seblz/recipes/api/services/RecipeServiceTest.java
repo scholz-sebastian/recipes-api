@@ -2,8 +2,8 @@ package de.seblz.recipes.api.services;
 
 import de.seblz.recipes.api.db.entity.RecipeEntity;
 import de.seblz.recipes.api.db.repository.RecipesRepository;
-import de.seblz.recipes.api.dto.request.CreateRecipeRequest;
-import de.seblz.recipes.api.mapper.CreateRecipeRequestMapper;
+import de.seblz.recipes.api.dto.request.Recipe;
+import de.seblz.recipes.api.mapper.RecipeMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -21,13 +21,14 @@ import static org.mockito.Mockito.*;
 class RecipeServiceTest {
 
     private static final UUID MOCKED_UUID = UUID.fromString("46532b02-d5b4-4055-b88d-7516c9cf5e40");
+
     @InjectMocks
     private RecipeService service;
 
     @Mock
     private RecipesRepository recipesRepository;
     @Mock
-    private CreateRecipeRequestMapper createRecipeRequestMapper;
+    private RecipeMapper createRecipeRequestMapper;
 
     @BeforeEach
     void setup() {
@@ -36,15 +37,15 @@ class RecipeServiceTest {
 
     @Test
     void testSave() {
-        CreateRecipeRequest request = new CreateRecipeRequest();
+        Recipe request = new Recipe();
         RecipeEntity entity = new RecipeEntity();
         entity.setRecipeId(MOCKED_UUID);
-        when(createRecipeRequestMapper.map(request)).thenReturn(entity);
+        when(createRecipeRequestMapper.mapRecipe(request)).thenReturn(entity);
 
-        String result = service.create(request);
+        RecipeEntity result = service.create(request);
 
         verify(recipesRepository, times(1)).save(entity);
-        assertEquals(MOCKED_UUID.toString(), result);
+        assertEquals(entity, result);
     }
 
     @Test

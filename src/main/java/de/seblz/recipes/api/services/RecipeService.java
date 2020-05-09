@@ -2,8 +2,8 @@ package de.seblz.recipes.api.services;
 
 import de.seblz.recipes.api.db.entity.RecipeEntity;
 import de.seblz.recipes.api.db.repository.RecipesRepository;
-import de.seblz.recipes.api.dto.request.CreateRecipeRequest;
-import de.seblz.recipes.api.mapper.CreateRecipeRequestMapper;
+import de.seblz.recipes.api.dto.request.Recipe;
+import de.seblz.recipes.api.mapper.RecipeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -16,20 +16,24 @@ import java.util.UUID;
 public class RecipeService {
 
     private final RecipesRepository recipesRepository;
-    private final CreateRecipeRequestMapper createRecipeRequestMapper;
+    private final RecipeMapper createRecipeRequestMapper;
 
-    public RecipeEntity create(CreateRecipeRequest request) {
-        RecipeEntity entity = createRecipeRequestMapper.map(request);
+    public RecipeEntity create(Recipe request) {
+        RecipeEntity entity = createRecipeRequestMapper.mapRecipe(request);
         entity.setRecipeId(UUID.randomUUID());
         recipesRepository.save(entity);
         return entity;
     }
 
-    public RecipeEntity update(String recipeId, CreateRecipeRequest request) {
-        RecipeEntity entity = createRecipeRequestMapper.map(request);
+    public RecipeEntity update(String recipeId, Recipe request) {
+        RecipeEntity entity = createRecipeRequestMapper.mapRecipe(request);
         entity.setRecipeId(UUID.fromString(recipeId));
         recipesRepository.save(entity);
         return entity;
+    }
+
+    public void delete(String recipeId) {
+        recipesRepository.deleteById(UUID.fromString(recipeId));
     }
 
     public List<RecipeEntity> findAll() {

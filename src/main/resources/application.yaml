@@ -2,7 +2,7 @@ recipe:
   security:
     apiMatcher: "/api/**"
     cors:
-      allowedOrigins: *
+      allowedOrigins: "*"
       allowedHeaders: "*"
       exposedHeaders: Location, Content-Disposition
       allowedMethods: GET,POST,PUT,DELETE,OPTIONS

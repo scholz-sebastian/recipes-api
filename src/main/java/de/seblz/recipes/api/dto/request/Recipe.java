@@ -8,7 +8,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CreateRecipeRequest {
+public class Recipe {
 
     @Schema(example = "Cheesecake")
     private String title;
